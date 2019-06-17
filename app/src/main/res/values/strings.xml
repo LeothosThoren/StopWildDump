@@ -4,6 +4,25 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="other">Other</string>
+    <string name="detail">Detail</string>
+    <string name="report">Report</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Map-->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">@string/map_api_key</string>
+    <string name="map_api_key">AIzaSyAXKsXiBk6eTGQ9AnQiLC5RDqbxdzMo-_o</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="standard">Standard</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="satellite">Satellite</string>
+    <string name="terrain">Terrain</string>
+    <string name="error_message">An error occurred, maybe there is no internet!</string>
+
+
 </resources>

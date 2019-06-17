@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:dist="http://schemas.android.com/apk/distribution"
+          xmlns:tools="http://schemas.android.com/tools"
           package="fr.leothosthoren.stopwilddump">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <dist:module dist:instant="true"/>
 
     <application
             android:allowBackup="true"
+            android:usesCleartextTraffic="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".ui.ReportWildDumpActivity">
-        </activity>
-        <activity
-                android:name=".ui.WildDumpActivity"
-                android:label="@string/title_activity_wild_dump"
-                android:parentActivityName=".ui.HomeActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="fr.leothosthoren.stopwilddump.ui.HomeActivity"/>
-        </activity>
-        <activity android:name=".ui.HomeActivity">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
+
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version"/>
+
+        <activity android:name=".ui.common.WildDumpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

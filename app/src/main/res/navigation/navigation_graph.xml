@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_graph" app:startDestination="@id/homeFragment">
+
+    <fragment android:id="@+id/homeFragment" android:name="fr.leothosthoren.stopwilddump.ui.home.HomeFragment"
+              android:label="Home" tools:layout="@layout/fragment_home">
+        <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_map"/>
+    </fragment>
+
+    <fragment android:id="@+id/destination_map" android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
+              android:label="Map" tools:layout="@layout/fragment_wild_dump_map">
+        <action android:id="@+id/action_destination_map_to_destination_detail"
+                app:destination="@id/destination_detail"
+        />
+    </fragment>
+
+    <fragment android:id="@+id/destination_list"
+              android:name="fr.leothosthoren.stopwilddump.ui.WildDumpListFragment"
+              android:label="List" tools:layout="@layout/fragment_wild_dump_list"/>
+
+    <fragment android:id="@+id/destination_detail"
+              android:name="fr.leothosthoren.stopwilddump.ui.WildDumpDetailFragment"
+              android:label="Detail" tools:layout="@layout/fragment_wild_dump_detail">
+        <action android:id="@+id/action_destination_detail_to_destination_map" app:destination="@id/destination_map"
+        />
+        <action android:id="@+id/action_destination_detail_to_destination_list"
+                app:destination="@id/destination_list"
+        />
+    </fragment>
+
+
+</navigation>
