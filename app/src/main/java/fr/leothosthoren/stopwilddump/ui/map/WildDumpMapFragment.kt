@@ -11,19 +11,23 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterManager
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
 import kotlinx.android.synthetic.main.include_map_type_button.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
+
 const val REQUEST_CODE_LOCATION = 123
+val FRANCE = LatLng(47.1932998, 2.4416936)
+const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
 
 class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
+    private lateinit var clusterManager: ClusterManager<ClusterUtils>
     private lateinit var sharedViewModel: CommonViewModel
 
     override fun onCreateView(
@@ -31,10 +35,12 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_wild_dump_map, container, false)
-
+        var mapViewBundle: Bundle? = null
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY)
+        }
         mMapView = rootView.findViewById(R.id.mapView)
-        mMapView.onCreate(savedInstanceState)
-
+        mMapView.onCreate(mapViewBundle)
         mMapView.onResume()
 
         try {
@@ -46,6 +52,18 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
         mMapView.getMapAsync(this)
 
         return rootView
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        var mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY)
+        if (mapViewBundle == null) {
+            mapViewBundle = Bundle()
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle)
+        }
+
+        mMapView.onSaveInstanceState(mapViewBundle)
     }
 
     override fun onStart() {
@@ -64,7 +82,7 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
         centeringMapWithinAnArea()
         enableMyLocation()
         changeMapType()
-        addMarkersOnMap()
+        setUpClusterer()
     }
 
 
@@ -76,23 +94,40 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun centeringMapWithinAnArea() {
-        val france = LatLngBounds(LatLng(47.1932998, 2.4416936), LatLng(47.1932998, 2.4416936))
+        val france = LatLngBounds(FRANCE, FRANCE)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(france.center, 5.5f))
+    }
+
+    private fun setUpClusterer() {
+        clusterManager = ClusterManager<ClusterUtils>(context, googleMap)
+        googleMap.apply {
+            setOnCameraIdleListener(clusterManager)
+            setOnMarkerClickListener(clusterManager)
+        }
+
+        setUpClusterRenderer()
+        addMarkersOnMap()
+    }
+
+    private fun setUpClusterRenderer() {
+        val renderer = CustomClusterRenderer(context, googleMap, clusterManager)
+        clusterManager.renderer = renderer
     }
 
     private fun addMarkersOnMap() {
         activity?.let {
             sharedViewModel = ViewModelProviders.of(it).get(CommonViewModel::class.java)
-            val listSize = sharedViewModel.wildDumpData.value?.wildDumps
-            for (i in 0 until listSize?.size!!) {
-                googleMap.addMarker(
-                    MarkerOptions().position(
-                        LatLng(
-                            listSize[i]?.latitude!!,
-                            listSize[i]?.longitude!!
-                        )
-                    ).title(listSize[i]?.name)
+            val listItem = sharedViewModel.wildDumpData.value?.wildDumps
+            for (i in 0 until listItem?.size!!) {
+                val offsetItem = ClusterUtils(
+                    LatLng(
+                        listItem[i]?.latitude!!,
+                        listItem[i]?.longitude!!
+                    ), listItem[i]?.name!!,
+                    listItem[i]?.town!!
                 )
+
+                clusterManager.addItem(offsetItem)
             }
         }
     }

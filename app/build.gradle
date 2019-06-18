@@ -57,6 +57,10 @@ dependencies {
     // Google play services
     implementation "com.google.android.gms:play-services-maps:$google_play_version"
 
+    // Utility library
+    implementation "com.google.maps.android:android-maps-utils:0.5+"
+
+
     // Easy permissions
     implementation "pub.devrel:easypermissions:$easy_permission_version"
 

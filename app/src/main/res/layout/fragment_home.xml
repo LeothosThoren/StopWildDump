@@ -9,9 +9,11 @@
         android:layout_height="match_parent"
         android:background="@drawable/gradient_purple"
         tools:context=".ui.home.HomeFragment">
+
+
     <TextView
             android:id="@+id/tvTitle"
-            android:text="Because we don't want to see this anymore"
+            android:text="@string/home_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -19,8 +21,9 @@
             android:textColor="@android:color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
             android:layout_width="@dimen/home_button_size"
@@ -28,20 +31,21 @@
             android:background="@drawable/square_white_shape"
             android:scaleType="fitXY"
             android:src="@drawable/decharge_640"
-            android:id="@+id/goToMap" android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" android:layout_marginTop="16dp"/>
+            android:id="@+id/goToMap"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
     <ImageView
             android:layout_width="@dimen/home_button_size"
-            android:layout_height="@dimen/home_button_size"
+            android:layout_height="220dp"
             android:background="@drawable/square_white_shape"
             android:scaleType="fitXY"
-            android:src="@drawable/stop_decharges" android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/goToMap" android:id="@+id/goToReportWildDump"/>
+            android:src="@drawable/stop_decharges"
+            android:id="@+id/goToReportWildDump"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/goToMap"
+            app:layout_constraintStart_toStartOf="@+id/goToMap" app:layout_constraintEnd_toEndOf="@+id/goToMap"
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

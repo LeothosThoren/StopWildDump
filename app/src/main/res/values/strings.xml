@@ -23,6 +23,7 @@
     <string name="satellite">Satellite</string>
     <string name="terrain">Terrain</string>
     <string name="error_message">An error occurred, maybe there is no internet!</string>
+    <string name="home_title">Because we don\'t want to see this anymore</string>
 
 
 </resources>

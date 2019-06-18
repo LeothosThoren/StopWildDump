@@ -6,14 +6,15 @@
 
     <fragment android:id="@+id/homeFragment" android:name="fr.leothosthoren.stopwilddump.ui.home.HomeFragment"
               android:label="Home" tools:layout="@layout/fragment_home">
-        <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_map"/>
+        <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_map"
+        />
     </fragment>
 
     <fragment android:id="@+id/destination_map" android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
               android:label="Map" tools:layout="@layout/fragment_wild_dump_map">
         <action android:id="@+id/action_destination_map_to_destination_detail"
                 app:destination="@id/destination_detail"
-        />
+                app:exitAnim="@anim/nav_default_exit_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 
     <fragment android:id="@+id/destination_list"

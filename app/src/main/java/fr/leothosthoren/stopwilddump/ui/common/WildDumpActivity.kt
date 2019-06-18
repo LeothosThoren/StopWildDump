@@ -24,10 +24,12 @@ class WildDumpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wild_dump)
+        setSupportActionBar(toolbar)
 
         setUpBottomNavMenu()
-        //setupAppBar()
+        setupAppBar()
         Log.d("DEBUG", "${viewModel.wildDumpData.value?.informations}")
+
     }
 
 
@@ -46,9 +48,9 @@ class WildDumpActivity : AppCompatActivity() {
         }
     }
 
-    /*private fun setupAppBar() {
+    private fun setupAppBar() {
         NavigationUI.setupActionBarWithNavController(this, navController)
-    }*/
+    }
 
 
 }
