@@ -11,6 +11,8 @@ buildscript {
         dagger2_version = '2.22.1'
         rxjava_version = '2.2.6'
         rxandroid_version = '2.1.0'
+        circle_image_version = '3.0.0'
+        glide_version = '4.9.0'
 
     }
     repositories {

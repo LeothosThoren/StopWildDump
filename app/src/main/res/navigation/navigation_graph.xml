@@ -13,7 +13,7 @@
     <fragment android:id="@+id/destination_map" android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
               android:label="Map" tools:layout="@layout/fragment_wild_dump_map">
         <action android:id="@+id/action_destination_map_to_destination_detail"
-                app:destination="@id/destination_detail"
+                app:destination="@id/detailFragment"
                 app:exitAnim="@anim/nav_default_exit_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 
@@ -21,7 +21,7 @@
               android:name="fr.leothosthoren.stopwilddump.ui.WildDumpListFragment"
               android:label="List" tools:layout="@layout/fragment_wild_dump_list"/>
 
-    <fragment android:id="@+id/destination_detail"
+    <fragment android:id="@+id/detailFragment"
               android:name="fr.leothosthoren.stopwilddump.ui.WildDumpDetailFragment"
               android:label="Detail" tools:layout="@layout/fragment_wild_dump_detail">
         <action android:id="@+id/action_destination_detail_to_destination_map" app:destination="@id/destination_map"

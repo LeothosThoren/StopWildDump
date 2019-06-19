@@ -42,7 +42,7 @@ class WildDumpActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment -> nav_view.visibility = View.GONE
-                R.id.destination_detail -> nav_view.visibility = View.GONE
+                R.id.detailFragment -> nav_view.visibility = View.GONE
                 else -> nav_view.visibility = View.VISIBLE
             }
         }

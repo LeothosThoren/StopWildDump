@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/gradient_purple</item>
     </style>
 
     <!-- Toolbar theme -->
@@ -15,10 +16,38 @@
         <item name="android:layout_width">wrap_content</item>
     </style>
 
-    <style name="AppTheme.WhiteTextAppearance">
+    <style name="AppTheme.ClusterBlackTextAppearance">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- Text style -->
+    <style name="AppText" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="AppText.Title">
+        <item name="android:textSize">@dimen/title_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
+    </style>
+
+    <style name="AppText.Subtitle">
+        <item name="android:textSize">@dimen/title_size</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppText.Text">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <!-- Bottom navigation view style -->
+    <style name="BottomNavigationView">
+        <item name="itemIconTint">@drawable/navigation_bar_selection_button</item>
+        <item name="itemTextColor">@drawable/navigation_bar_selection_button</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
 </resources>

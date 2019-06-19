@@ -3,6 +3,7 @@ package fr.leothosthoren.stopwilddump.ui.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +15,12 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.clustering.ClusterManager
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
+import fr.leothosthoren.stopwilddump.ui.map.map_utils.ClusterUtils
+import fr.leothosthoren.stopwilddump.ui.map.map_utils.CustomClusterRenderer
 import kotlinx.android.synthetic.main.include_map_type_button.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-
-const val REQUEST_CODE_LOCATION = 123
-val FRANCE = LatLng(47.1932998, 2.4416936)
-const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
 
 class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
 
@@ -86,6 +85,16 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
+    /* private fun initGoogleMap() {
+         val googleMapUtils = GoogleMapUtils(context!!, googleMap, clusterManager)
+         googleMapUtils.centeringMapWithinAnArea()
+         activity?.let {
+             sharedViewModel = ViewModelProviders.of(it).get(CommonViewModel::class.java)
+             val listItem = sharedViewModel.wildDumpData.value?.wildDumps
+             googleMapUtils.setUpClusterer(listItem)
+         }
+     }*/
+
     private fun changeMapType() {
         standardType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL }
         terrainType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN }
@@ -110,9 +119,11 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setUpClusterRenderer() {
-        val renderer = CustomClusterRenderer(context, googleMap, clusterManager)
+        val renderer =
+            CustomClusterRenderer(context, googleMap, clusterManager)
         clusterManager.renderer = renderer
     }
+
 
     private fun addMarkersOnMap() {
         activity?.let {
@@ -124,15 +135,17 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
                         listItem[i]?.latitude!!,
                         listItem[i]?.longitude!!
                     ), listItem[i]?.name!!,
-                    listItem[i]?.town!!
+                    listItem[i]?.town!!,
+                    listItem[i]?.type?.contains("Ramassage")!!
                 )
-
+                Log.d("DEBUG", "wildumptype = ${listItem[i]?.type?.contains("Ramassage")!!} ->  ${listItem[i]?.type}")
                 clusterManager.addItem(offsetItem)
             }
         }
     }
 
-    /** Override the onRequestPermissionResult to use EasyPermissions */
+
+    /*** Override the onRequestPermissionResult to use EasyPermissions */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -162,9 +175,11 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+
     private fun hasLocationPermission(): Boolean {
         return EasyPermissions.hasPermissions(context!!, Manifest.permission.ACCESS_FINE_LOCATION)
     }
+
 
     override fun onPause() {
         mMapView.onPause()
@@ -186,4 +201,10 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
         mMapView.onLowMemory()
     }
 
+    companion object {
+        const val REQUEST_CODE_LOCATION = 123
+        const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
+        val FRANCE = LatLng(47.1932998, 2.4416936)
+
+    }
 }
