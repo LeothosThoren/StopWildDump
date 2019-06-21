@@ -1,0 +1,442 @@
+{
+  "type": "FeatureCollection",
+  "name": "ms:gip_proprete.gipdecheterie",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.1",
+        "commune": "GRIGNY",
+        "code_postal": "69520",
+        "voie": "Avenue Chantelot",
+        "numerodansvoie": "28",
+        "gestionnaire": "UTVM",
+        "telephone": "0472306124",
+        "identifiant": "653",
+        "code_insee": "69096",
+        "gid": "1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.766886,
+          45.607609999057004
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.2",
+        "commune": "FEYZIN",
+        "code_postal": "69320",
+        "voie": "Rue Léon Blum",
+        "numerodansvoie": "26",
+        "gestionnaire": "UTVM",
+        "telephone": "0478706303",
+        "identifiant": "1681",
+        "code_insee": "69276",
+        "gid": "2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.856028,
+          45.677342999057068
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.3",
+        "commune": "FRANCHEVILLE",
+        "code_postal": "69340",
+        "voie": "Route de la Gare",
+        "numerodansvoie": "29",
+        "gestionnaire": "UTVM",
+        "telephone": "0478590432",
+        "identifiant": "220",
+        "code_insee": "69089",
+        "gid": "3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.771977,
+          45.728953999057111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.4",
+        "commune": "GENAS",
+        "code_postal": "69740",
+        "voie": "Rue de l'Egalité",
+        "gestionnaire": "UTVM",
+        "telephone": "0478906403",
+        "identifiant": "69",
+        "code_insee": "69277",
+        "gid": "4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.008431,
+          45.744917999057122
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.5",
+        "commune": "MIONS",
+        "code_postal": "69780",
+        "voie": "Boulevard des Nations",
+        "gestionnaire": "UTVM",
+        "telephone": "0478214997",
+        "identifiant": "133",
+        "code_insee": "69283",
+        "gid": "5"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.932361,
+          45.672724999057067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.6",
+        "commune": "PIERRE-BENITE",
+        "code_postal": "69310",
+        "voie": "Chemin de la Gravière",
+        "gestionnaire": "UTVM",
+        "telephone": "0472392187",
+        "identifiant": "71",
+        "code_insee": "69152",
+        "gid": "6"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.829504,
+          45.696165999057065
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.7",
+        "commune": "VENISSIEUX",
+        "code_postal": "69200",
+        "voie": "Avenue Jean Moulin",
+        "gestionnaire": "UTVM",
+        "telephone": "0478705665",
+        "identifiant": "217",
+        "code_insee": "69259",
+        "gid": "7"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.868174,
+          45.689137999057074
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.8",
+        "commune": "VILLEURBANNE",
+        "code_postal": "69100",
+        "voie": "Rue Alfred Brinon",
+        "gestionnaire": "UTVM",
+        "telephone": "0478845609",
+        "identifiant": "210",
+        "code_insee": "69266",
+        "gid": "8"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.897047,
+          45.776248999057159
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.9",
+        "commune": "DECINES-CHARPIEU",
+        "code_postal": "69150",
+        "voie": "Rue Paul et Marc Barbezat",
+        "numerodansvoie": "66",
+        "gestionnaire": "UTVM",
+        "telephone": "0478493504",
+        "identifiant": "218",
+        "code_insee": "69275",
+        "gid": "9"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.938435,
+          45.756643999057133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.10",
+        "commune": "LYON 7EME",
+        "code_postal": "69007",
+        "voie": "Boulevard de l'Artillerie",
+        "numerodansvoie": "12",
+        "gestionnaire": "UTVM",
+        "telephone": "0472734657",
+        "identifiant": "70",
+        "code_insee": "69387",
+        "gid": "10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.842641,
+          45.73537699905711
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.11",
+        "commune": "LYON 9EME",
+        "code_postal": "69009",
+        "voie": "Avenue Sidoine Apollinaire",
+        "numerodansvoie": "82",
+        "gestionnaire": "UTVM",
+        "telephone": "0478471057",
+        "identifiant": "24",
+        "code_insee": "69389",
+        "gid": "11"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.795458,
+          45.768387999057154
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.12",
+        "commune": "NEUVILLE-SUR-SAONE",
+        "code_postal": "69250",
+        "voie": "Avenue des Frères Lumière",
+        "gestionnaire": "UTVM",
+        "telephone": "0472089275",
+        "identifiant": "199",
+        "code_insee": "69143",
+        "gid": "12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.817779,
+          45.885177999057262
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.13",
+        "commune": "RILLIEUX-LA-PAPE",
+        "code_postal": "69140",
+        "voie": "Route de Fontaines",
+        "gestionnaire": "UTVM",
+        "telephone": "0478971030",
+        "identifiant": "193",
+        "code_insee": "69286",
+        "gid": "13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.881695,
+          45.823475999057209
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.14",
+        "commune": "SAINT-GENIS-LES-OLLIERES",
+        "code_postal": "69290",
+        "voie": "Rue Louis Pradel",
+        "numerodansvoie": "2",
+        "gestionnaire": "UTVM",
+        "telephone": "0478571659",
+        "identifiant": "214",
+        "code_insee": "69205",
+        "gid": "14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.742717,
+          45.757131999057137
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.15",
+        "commune": "SAINT-PRIEST",
+        "code_postal": "69800",
+        "voie": "Rue du Maconnais",
+        "gestionnaire": "UTVM",
+        "telephone": "0478210743",
+        "identifiant": "215",
+        "code_insee": "69290",
+        "gid": "15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.922352,
+          45.695811999057085
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.16",
+        "commune": "CALUIRE-ET-CUIRE",
+        "code_postal": "69300",
+        "voie": "Impasse des Lièvres",
+        "numerodansvoie": "62",
+        "gestionnaire": "UTVM",
+        "telephone": "0478393060",
+        "identifiant": "801",
+        "code_insee": "69034",
+        "gid": "16"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.864807,
+          45.804056999057181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.17",
+        "commune": "VAULX-EN-VELIN",
+        "code_postal": "69120",
+        "voie": "Rue Pierre Mendès France",
+        "numerodansvoie": "15",
+        "gestionnaire": "UTVM",
+        "telephone": "0478807139",
+        "identifiant": "216",
+        "code_insee": "69256",
+        "gid": "17"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.933348,
+          45.777607999057153
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.18",
+        "commune": "CHAMPAGNE-AU-MONT-D'OR",
+        "code_postal": "69410",
+        "voie": "Impasse des Anciennes Vignes",
+        "gestionnaire": "UTVM",
+        "telephone": "0478475651",
+        "identifiant": "143",
+        "code_insee": "69040",
+        "gid": "18"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.773098,
+          45.802298999057179
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.19",
+        "commune": "LYON 5EME",
+        "code_postal": "69005",
+        "voie": "Quai Fulchiron",
+        "gestionnaire": "UTVM",
+        "telephone": "0478634000",
+        "identifiant": "2721",
+        "code_insee": "69385",
+        "gid": "19"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.824068,
+          45.75478199905713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "gml_id": "gip_proprete.gipdecheterie.20",
+        "commune": "VILLEURBANNE",
+        "code_postal": "69100",
+        "voie": "Avenue Paul Krüger",
+        "numerodansvoie": "100",
+        "gestionnaire": "UTVM",
+        "telephone": "0478547859",
+        "identifiant": "206",
+        "code_insee": "69266",
+        "gid": "20"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.900754,
+          45.75462599905714
+        ]
+      }
+    }
+  ]
+}

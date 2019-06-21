@@ -3,7 +3,6 @@ package fr.leothosthoren.stopwilddump.ui.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.data.geojson.GeoJsonLayer
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
 import fr.leothosthoren.stopwilddump.ui.map.map_utils.ClusterUtils
@@ -27,7 +27,12 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
     private lateinit var clusterManager: ClusterManager<ClusterUtils>
-    private lateinit var sharedViewModel: CommonViewModel
+    private val sharedViewModel by lazy {
+        activity?.let {
+            ViewModelProviders.of(it).get(CommonViewModel::class.java)
+        }
+    }
+    private lateinit var layer: GeoJsonLayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,23 +82,11 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-
         centeringMapWithinAnArea()
         enableMyLocation()
         changeMapType()
         setUpClusterer()
     }
-
-
-    /* private fun initGoogleMap() {
-         val googleMapUtils = GoogleMapUtils(context!!, googleMap, clusterManager)
-         googleMapUtils.centeringMapWithinAnArea()
-         activity?.let {
-             sharedViewModel = ViewModelProviders.of(it).get(CommonViewModel::class.java)
-             val listItem = sharedViewModel.wildDumpData.value?.wildDumps
-             googleMapUtils.setUpClusterer(listItem)
-         }
-     }*/
 
     private fun changeMapType() {
         standardType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL }
@@ -109,41 +102,57 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
 
     private fun setUpClusterer() {
         clusterManager = ClusterManager<ClusterUtils>(context, googleMap)
+
         googleMap.apply {
             setOnCameraIdleListener(clusterManager)
             setOnMarkerClickListener(clusterManager)
         }
-
         setUpClusterRenderer()
-        addMarkersOnMap()
+
     }
 
     private fun setUpClusterRenderer() {
         val renderer =
             CustomClusterRenderer(context, googleMap, clusterManager)
         clusterManager.renderer = renderer
+
+        val listOfClusterUtils = listOf(addDumpMarkersOnMap()!!, addLandfillMarkersOnMap()!!)
+        clusterManager.addItems(listOfClusterUtils)
     }
 
 
-    private fun addMarkersOnMap() {
-        activity?.let {
-            sharedViewModel = ViewModelProviders.of(it).get(CommonViewModel::class.java)
-            val listItem = sharedViewModel.wildDumpData.value?.wildDumps
-            for (i in 0 until listItem?.size!!) {
-                val offsetItem = ClusterUtils(
-                    LatLng(
-                        listItem[i]?.latitude!!,
-                        listItem[i]?.longitude!!
-                    ), listItem[i]?.name!!,
+    private fun addDumpMarkersOnMap(): ClusterUtils? {
+        var offsetItem: ClusterUtils? = null
+        val listItem = sharedViewModel?.wildDumpData?.value?.wildDumps
+
+        for (i in 0 until listItem?.size!!) {
+            offsetItem =
+                ClusterUtils(
+                    LatLng(listItem[i]?.latitude!!, listItem[i]?.longitude!!),
+                    listItem[i]?.name!!,
                     listItem[i]?.town!!,
                     listItem[i]?.type?.contains("Ramassage")!!
                 )
-                Log.d("DEBUG", "wildumptype = ${listItem[i]?.type?.contains("Ramassage")!!} ->  ${listItem[i]?.type}")
-                clusterManager.addItem(offsetItem)
-            }
+            clusterManager.addItem(offsetItem)
         }
+        return offsetItem
     }
 
+    private fun addLandfillMarkersOnMap(): ClusterUtils? {
+        var offsetItem: ClusterUtils? = null
+        val result = sharedViewModel?.landfills?.value
+        for (features in result?.features!!) {
+            offsetItem =
+                ClusterUtils(
+                    LatLng(features?.geometry?.coordinates?.get(1)!!, features.geometry.coordinates[0]!!),
+                    features.properties?.nomDeLaDecheterie!!,
+                    features.properties.commune!!,
+                    true
+                )
+            clusterManager.addItem(offsetItem)
+        }
+        return offsetItem
+    }
 
     /*** Override the onRequestPermissionResult to use EasyPermissions */
     override fun onRequestPermissionsResult(

@@ -3,13 +3,18 @@ package fr.leothosthoren.stopwilddump.ui.common
 import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.base.BaseViewModel
+import fr.leothosthoren.stopwilddump.data.landfill_models.Landfill
 import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
 import fr.leothosthoren.stopwilddump.data.wildump_models.DumpData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.io.IOException
+import java.nio.charset.Charset
 import javax.inject.Inject
 
 class CommonViewModel : BaseViewModel() {
@@ -21,10 +26,12 @@ class CommonViewModel : BaseViewModel() {
     // val
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val wildDumpData: MediatorLiveData<DumpData> = MediatorLiveData()
+    val landfills: MediatorLiveData<Landfill> = MediatorLiveData()
 
 
     init {
         loadWildDumpObject()
+        loadJsonFile()
     }
 
     private fun loadWildDumpObject() {
@@ -46,6 +53,30 @@ class CommonViewModel : BaseViewModel() {
                 }
             )
     }
+
+    private fun openJsonFile(): String? {
+        var json: String? = null
+        val file = "res/raw/landfills_list.json"
+        try {
+            val `is` = javaClass.classLoader?.getResourceAsStream(file)
+            val size = `is`?.available()
+            val buffer = ByteArray(size!!)
+            `is`.read(buffer)
+            `is`.close()
+            json = String(buffer, Charset.defaultCharset())
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
+        return json
+    }
+
+    private fun loadJsonFile() {
+        val moshi = Moshi.Builder().build()
+        val adapter: JsonAdapter<Landfill> = moshi.adapter(Landfill::class.java)
+        val result = adapter.fromJson(openJsonFile()!!)
+        landfills.value = result
+    }
+
 
 
     private fun onSubscribe() {

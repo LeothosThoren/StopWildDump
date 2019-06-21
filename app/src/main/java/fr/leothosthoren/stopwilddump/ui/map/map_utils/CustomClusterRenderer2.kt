@@ -13,7 +13,7 @@ import com.google.maps.android.ui.IconGenerator
 import fr.leothosthoren.stopwilddump.R
 
 
-data class CustomClusterRenderer(
+data class CustomClusterRenderer2(
     val context: Context?,
     val googleMap: GoogleMap,
     val clusterManager: ClusterManager<ClusterUtils>
@@ -22,23 +22,18 @@ data class CustomClusterRenderer(
     override fun onBeforeClusterItemRendered(item: ClusterUtils, markerOptions: MarkerOptions?) {
 
         val iconGenerator = IconGenerator(context?.applicationContext)
-
-        val view: View = if (item.getStatus()) {
-            inflate(context, R.layout.custom_clean_marker_layout, null)
-        } else {
-            inflate(context, R.layout.custom_trash_marker_layout, null)
-        }
+        val view: View = inflate(context, R.layout.custom_clean_marker_layout, null)
         iconGenerator.setBackground(null)
         iconGenerator.setContentView(view)
 
         val bitmap = iconGenerator.makeIcon()
-        markerOptions?.icon(BitmapDescriptorFactory.fromBitmap(bitmap))?.snippet(item.title)
+        markerOptions?.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<ClusterUtils>?, markerOptions: MarkerOptions?) {
 
         val clusterIconGenerator = IconGenerator(context?.applicationContext)
-        val clusterBackground = inflate(context, R.layout.custom_cluster_purple_marker_layout, null)
+        val clusterBackground = inflate(context, R.layout.custom_cluster_green_marker_layout, null)
         clusterIconGenerator.setBackground(null)
         clusterIconGenerator.setContentView(clusterBackground)
 
