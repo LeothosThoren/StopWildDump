@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import fr.leothosthoren.stopwilddump.R
@@ -38,10 +39,13 @@ class HomeFragment : Fragment() {
                 Navigation.findNavController(it).navigate(nextAction)
             }
         }
+
+        goToReportWildDump.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_info_graph)
+        }
     }
 
     fun isGooglePlayServiceOk(): Boolean {
-
         val availability = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
         if (availability == ConnectionResult.SUCCESS) {
             //We check that the google services is fine and user can make request

@@ -1,4 +1,4 @@
-package fr.leothosthoren.stopwilddump.ui
+package fr.leothosthoren.stopwilddump.ui.wildumplist
 
 
 import android.os.Bundle

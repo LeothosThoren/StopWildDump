@@ -4,12 +4,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/custom_marker_view"
-        android:background="@drawable/amu_bubble_shadow"
-        android:layout_width="wrap_content" android:layout_height="wrap_content">
+        android:background="@drawable/background_circle"
+        android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-            android:id="@+id/trashIcon" android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/trashIcon" android:layout_width="@dimen/map_icon_size"
+            android:layout_height="@dimen/map_icon_size"
             android:src="@drawable/ic_dump_trash"
             android:contentDescription="@null"
             tools:ignore="VectorDrawableCompat" app:layout_constraintTop_toTopOf="parent"

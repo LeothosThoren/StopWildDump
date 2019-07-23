@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@color/colorPrimaryDark"/>
-    <item android:state_checked="false" android:drawable="@color/colorLightGrey"/>
+    <item android:state_checked="true" android:drawable="@android:color/white"/>
+    <item android:state_checked="false" android:drawable="@color/colorDarkGrey"/>
+    <item android:drawable="@color/colorDarkGrey"/>
 </selector>

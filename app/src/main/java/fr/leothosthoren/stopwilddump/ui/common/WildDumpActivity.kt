@@ -6,51 +6,44 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import fr.leothosthoren.stopwilddump.R
 import kotlinx.android.synthetic.main.activity_wild_dump.*
-
 
 class WildDumpActivity : AppCompatActivity() {
 
     private val navController by lazy {
         Navigation.findNavController(this, R.id.nav_host_fragment)
     }
-
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(CommonViewModel::class.java)
+    }
+    private val appBarConfiguration by lazy {
+        AppBarConfiguration(navController.graph)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wild_dump)
-        setSupportActionBar(toolbar)
 
-        setUpBottomNavMenu()
         setupAppBar()
+        setUpBottomNavMenu()
         Log.d("DEBUG", "${viewModel.wildDumpData.value?.informations}")
-
-    }
-
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     private fun setUpBottomNavMenu() {
-        nav_view.let { NavigationUI.setupWithNavController(it, navController) }
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        nav_view.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { nav, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> nav_view.visibility = View.GONE
-                R.id.detailFragment -> nav_view.visibility = View.GONE
-                else -> nav_view.visibility = View.VISIBLE
+                R.id.destination_map -> nav_view.visibility = View.VISIBLE
+                R.id.destination_list -> nav_view.visibility = View.VISIBLE
+                else -> nav_view.visibility = View.GONE
             }
         }
     }
 
     private fun setupAppBar() {
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
-
-
 }

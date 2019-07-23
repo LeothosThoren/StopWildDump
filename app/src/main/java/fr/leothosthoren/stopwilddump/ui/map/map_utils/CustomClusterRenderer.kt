@@ -12,14 +12,13 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.google.maps.android.ui.IconGenerator
 import fr.leothosthoren.stopwilddump.R
 
-
 data class CustomClusterRenderer(
     val context: Context?,
     val googleMap: GoogleMap,
-    val clusterManager: ClusterManager<ClusterUtils>
-) : DefaultClusterRenderer<ClusterUtils>(context, googleMap, clusterManager) {
+    val clusterManager: ClusterManager<ClusterItem>
+) : DefaultClusterRenderer<ClusterItem>(context, googleMap, clusterManager) {
 
-    override fun onBeforeClusterItemRendered(item: ClusterUtils, markerOptions: MarkerOptions?) {
+    override fun onBeforeClusterItemRendered(item: ClusterItem, markerOptions: MarkerOptions?) {
 
         val iconGenerator = IconGenerator(context?.applicationContext)
 
@@ -35,10 +34,17 @@ data class CustomClusterRenderer(
         markerOptions?.icon(BitmapDescriptorFactory.fromBitmap(bitmap))?.snippet(item.title)
     }
 
-    override fun onBeforeClusterRendered(cluster: Cluster<ClusterUtils>?, markerOptions: MarkerOptions?) {
-
+    override fun onBeforeClusterRendered(cluster: Cluster<ClusterItem>?, markerOptions: MarkerOptions?) {
+        var clusterBackground: View? = null
         val clusterIconGenerator = IconGenerator(context?.applicationContext)
-        val clusterBackground = inflate(context, R.layout.custom_cluster_purple_marker_layout, null)
+
+        cluster?.items?.forEach { cl ->
+            clusterBackground = if (cl.getType() == 2) {
+                inflate(context, R.layout.custom_cluster_green_marker_layout, null)
+            } else {
+                inflate(context, R.layout.custom_cluster_purple_marker_layout, null)
+            }
+        }
         clusterIconGenerator.setBackground(null)
         clusterIconGenerator.setContentView(clusterBackground)
 
@@ -46,7 +52,7 @@ data class CustomClusterRenderer(
         markerOptions?.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
     }
 
-    override fun shouldRenderAsCluster(cluster: Cluster<ClusterUtils>): Boolean {
+    override fun shouldRenderAsCluster(cluster: Cluster<ClusterItem>): Boolean {
         return cluster.size > 1
     }
 }

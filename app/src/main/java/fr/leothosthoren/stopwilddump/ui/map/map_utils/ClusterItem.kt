@@ -3,7 +3,7 @@ package fr.leothosthoren.stopwilddump.ui.map.map_utils
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
-data class ClusterUtils(
+data class ClusterItem(
     private val position: LatLng,
     private val title: String,
     private val snippet: String,
@@ -30,5 +30,4 @@ data class ClusterUtils(
     fun getType(): Int {
         return type
     }
-
 }

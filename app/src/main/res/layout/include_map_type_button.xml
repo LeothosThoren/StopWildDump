@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-    <Button
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapTypeGroup"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/background_rounded_corner"
+            android:checkedButton="@id/standardType">
+    <RadioButton
+            style="@style/ButtonMapType"
             android:text="@string/standard"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/standardType" android:layout_weight="1"/>
-
-    <Button
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/standardType" android:bufferType="normal"
+    />
+    <RadioButton
+            style="@style/ButtonMapType"
             android:text="@string/terrain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/terrainType" android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/terrainType"/>
 
-    <Button
+    <RadioButton
+            style="@style/ButtonMapType"
             android:text="@string/hybrid"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/hybridType" android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/hybridType"/>
 
-    <Button
+    <RadioButton
+            style="@style/ButtonMapType"
             android:text="@string/satellite"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/satelliteType" android:layout_weight="1"/>
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/satelliteType"/>
+</RadioGroup>

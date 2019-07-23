@@ -15,20 +15,20 @@ import javax.inject.Singleton
 interface ViewModelInjector {
 
     /**
-     * Injects required dependencies into the specified FolderViewModel.
+     * Injects required dependencies into the specified ViewModel.
      * @param CommonViewModel commonViewModel in which to inject the dependencies
      */
     fun inject(commonViewModel: CommonViewModel)
 
     /**
-     * Injects required dependencies into the specified FolderViewModel.
+     * Injects required dependencies into the specified ViewModel.
      * @param HomeViewModel homeViewModel in which to inject the dependencies
      */
     fun inject(homeViewModel: HomeViewModel)
 
 
     /**
-     * Injects required dependencies into the specified LoginViewModel.
+     * Injects required dependencies into the specified ViewModel.
      * @param WildDumpMapViewModel mapViewModel in which to inject the dependencies
      */
     fun inject(mapViewModel: WildDumpMapViewModel)

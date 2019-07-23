@@ -8,6 +8,7 @@
               android:label="Home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_map"
         />
+        <action android:id="@+id/action_homeFragment_to_info_graph" app:destination="@id/info_graph"/>
     </fragment>
 
     <fragment android:id="@+id/destination_map" android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
@@ -18,18 +19,15 @@
     </fragment>
 
     <fragment android:id="@+id/destination_list"
-              android:name="fr.leothosthoren.stopwilddump.ui.WildDumpListFragment"
-              android:label="List" tools:layout="@layout/fragment_wild_dump_list"/>
+              android:name="fr.leothosthoren.stopwilddump.ui.wildumplist.WildDumpListFragment"
+              android:label="List" tools:layout="@layout/fragment_wild_dump_list">
+        <action android:id="@+id/action_destination_list_to_destination_map" app:destination="@+id/destination_map"/>
+    </fragment>
 
     <fragment android:id="@+id/detailFragment"
-              android:name="fr.leothosthoren.stopwilddump.ui.WildDumpDetailFragment"
-              android:label="Detail" tools:layout="@layout/fragment_wild_dump_detail">
-        <action android:id="@+id/action_destination_detail_to_destination_map" app:destination="@id/destination_map"
-        />
-        <action android:id="@+id/action_destination_detail_to_destination_list"
-                app:destination="@id/destination_list"
-        />
-    </fragment>
+              android:name="fr.leothosthoren.stopwilddump.ui.details.WildDumpDetailFragment"
+              android:label="Detail" tools:layout="@layout/fragment_wild_dump_detail"/>
+    <include app:graph="@navigation/info_graph"/>
 
 
 </navigation>

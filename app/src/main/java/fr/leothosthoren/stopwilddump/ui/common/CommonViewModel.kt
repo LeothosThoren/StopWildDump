@@ -1,15 +1,14 @@
 package fr.leothosthoren.stopwilddump.ui.common
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.base.BaseViewModel
-import fr.leothosthoren.stopwilddump.data.landfill_models.Landfill
+import fr.leothosthoren.stopwilddump.data.models.landfill_models.Landfill
+import fr.leothosthoren.stopwilddump.data.models.wildump_models.DumpData
 import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
-import fr.leothosthoren.stopwilddump.data.wildump_models.DumpData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -28,7 +27,6 @@ class CommonViewModel : BaseViewModel() {
     val wildDumpData: MediatorLiveData<DumpData> = MediatorLiveData()
     val landfills: MediatorLiveData<Landfill> = MediatorLiveData()
 
-
     init {
         loadWildDumpObject()
         loadJsonFile()
@@ -43,13 +41,9 @@ class CommonViewModel : BaseViewModel() {
                 // Add result
                 { result ->
                     onSuccess(result)
-                    Log.d("DEBUG", "${result.informations}")
-
                 },
-
                 {
                     onError()
-                    Log.d("DEBUG", "${it.message}")
                 }
             )
     }
@@ -58,11 +52,11 @@ class CommonViewModel : BaseViewModel() {
         var json: String? = null
         val file = "res/raw/landfills_list.json"
         try {
-            val `is` = javaClass.classLoader?.getResourceAsStream(file)
-            val size = `is`?.available()
+            val inputStream = javaClass.classLoader?.getResourceAsStream(file)
+            val size = inputStream?.available()
             val buffer = ByteArray(size!!)
-            `is`.read(buffer)
-            `is`.close()
+            inputStream.read(buffer)
+            inputStream.close()
             json = String(buffer, Charset.defaultCharset())
         } catch (ex: IOException) {
             ex.printStackTrace()
@@ -77,8 +71,6 @@ class CommonViewModel : BaseViewModel() {
         landfills.value = result
     }
 
-
-
     private fun onSubscribe() {
         errorMessage.value = null
     }
@@ -90,7 +82,6 @@ class CommonViewModel : BaseViewModel() {
     private fun onSuccess(wildDumpData: DumpData?) {
         this.wildDumpData.value = wildDumpData
     }
-
 
     /**
      * To dispose subscription when the viewModel is no longer used and will be destroyed
