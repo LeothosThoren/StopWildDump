@@ -7,7 +7,8 @@ data class ClusterUtils(
     private val position: LatLng,
     private val title: String,
     private val snippet: String,
-    private val status: Boolean
+    private val status: Boolean,
+    private val type: Int
 ) : ClusterItem {
 
     override fun getSnippet(): String {
@@ -24,6 +25,10 @@ data class ClusterUtils(
 
     fun getStatus(): Boolean {
         return status
+    }
+
+    fun getType(): Int {
+        return type
     }
 
 }
