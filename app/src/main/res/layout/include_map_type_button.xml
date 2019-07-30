@@ -6,15 +6,16 @@
             android:orientation="horizontal"
             android:background="@drawable/background_rounded_corner"
             android:checkedButton="@id/standardType">
-    <RadioButton
+
+    <androidx.appcompat.widget.AppCompatButton
             style="@style/ButtonMapType"
             android:text="@string/standard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/standardType" android:bufferType="normal"
-    />
-    <RadioButton
+            android:id="@+id/standardType" android:bufferType="normal"/>
+
+    <androidx.appcompat.widget.AppCompatButton
             style="@style/ButtonMapType"
             android:text="@string/terrain"
             android:layout_width="wrap_content"
@@ -22,16 +23,14 @@
             android:layout_weight="1"
             android:id="@+id/terrainType"/>
 
-    <RadioButton
-            style="@style/ButtonMapType"
+    <androidx.appcompat.widget.AppCompatButton
             android:text="@string/hybrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/hybridType"/>
 
-    <RadioButton
-            style="@style/ButtonMapType"
+    <androidx.appcompat.widget.AppCompatButton
             android:text="@string/satellite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

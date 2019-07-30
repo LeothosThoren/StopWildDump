@@ -52,7 +52,6 @@
     </style>
 
     <style name="ButtonMapType">
-        <item name="android:textColor">@drawable/map_text_state</item>
         <item name="android:background">@drawable/map_button_state</item>
     </style>
 </resources>

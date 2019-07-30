@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
@@ -23,7 +24,29 @@ import kotlinx.android.synthetic.main.include_map_type_button.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
+class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
+    ClusterManager.OnClusterClickListener<ClusterItem>,
+    ClusterManager.OnClusterInfoWindowClickListener<ClusterItem>,
+    ClusterManager.OnClusterItemClickListener<ClusterItem>,
+    ClusterManager.OnClusterItemInfoWindowClickListener<ClusterItem> {
+
+    override fun onClusterClick(p0: Cluster<ClusterItem>?): Boolean {
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT).show()
+        return true
+    }
+
+    override fun onClusterInfoWindowClick(p0: Cluster<ClusterItem>?) {
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onClusterItemClick(p0: ClusterItem?): Boolean {
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.title}", Toast.LENGTH_SHORT).show()
+        return true
+    }
+
+    override fun onClusterItemInfoWindowClick(p0: ClusterItem?) {
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.snippet}", Toast.LENGTH_SHORT).show()
+    }
 
     companion object {
         const val REQUEST_CODE_LOCATION = 123
@@ -110,8 +133,8 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
         googleMap.run {
             setOnCameraIdleListener(clusterManager)
             setOnMarkerClickListener(clusterManager)
-            setInfoWindowAdapter(CustomInfoWindowAdapter(LayoutInflater.from(context))) // new
             setOnInfoWindowClickListener(clusterManager)
+            setInfoWindowAdapter(clusterManager.markerManager)
         }
         setUpClusterRenderer()
     }
@@ -121,7 +144,7 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback {
             CustomClusterRenderer(context, googleMap, clusterManager)
         clusterManager.renderer = renderer
 
-        val listOfClusterItems = listOf(addLandfillMarkersOnMap())
+        val listOfClusterItems = listOf(addDumpMarkersOnMap())
         clusterManager.addItems(listOfClusterItems)
 
         // New
