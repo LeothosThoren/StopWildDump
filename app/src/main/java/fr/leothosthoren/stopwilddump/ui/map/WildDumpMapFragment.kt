@@ -144,7 +144,7 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
             CustomClusterRenderer(context, googleMap, clusterManager)
         clusterManager.renderer = renderer
 
-        val listOfClusterItems = listOf(addDumpMarkersOnMap())
+        val listOfClusterItems = listOf(addLandfillMarkersOnMap())
         clusterManager.addItems(listOfClusterItems)
 
         // New

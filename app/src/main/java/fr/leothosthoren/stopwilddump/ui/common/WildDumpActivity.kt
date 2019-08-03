@@ -2,6 +2,7 @@ package fr.leothosthoren.stopwilddump.ui.common
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -27,9 +28,27 @@ class WildDumpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wild_dump)
 
-        setupAppBar()
+        setupToolbar()
         setUpBottomNavMenu()
         Log.d("DEBUG", "${viewModel.wildDumpData.value?.informations}")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    private fun setupToolbar() {
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.homeFragment)
+                toolbar.visibility = View.GONE
+            else if (destination.id == R.id.destination_map)
+                toolbar.visibility = View.VISIBLE
+
+            //toolbar.menu.findItem(R.id.destination_list).isVisible = destination.id == R.id.destination_list
+
+        }
     }
 
     private fun setUpBottomNavMenu() {
@@ -37,13 +56,9 @@ class WildDumpActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { nav, destination, _ ->
             when (destination.id) {
                 R.id.destination_map -> nav_view.visibility = View.VISIBLE
-                R.id.destination_list -> nav_view.visibility = View.VISIBLE
+                R.id.destination_wild_dump_list -> nav_view.visibility = View.VISIBLE
                 else -> nav_view.visibility = View.GONE
             }
         }
-    }
-
-    private fun setupAppBar() {
-        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 }
