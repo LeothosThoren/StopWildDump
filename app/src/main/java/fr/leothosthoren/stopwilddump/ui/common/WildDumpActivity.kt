@@ -2,12 +2,15 @@ package fr.leothosthoren.stopwilddump.ui.common
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import fr.leothosthoren.stopwilddump.R
 import kotlinx.android.synthetic.main.activity_wild_dump.*
@@ -15,13 +18,13 @@ import kotlinx.android.synthetic.main.activity_wild_dump.*
 class WildDumpActivity : AppCompatActivity() {
 
     private val navController by lazy {
-        Navigation.findNavController(this, R.id.nav_host_fragment)
+        Navigation.findNavController(this, R.id.homeFragment)
     }
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(CommonViewModel::class.java)
     }
     private val appBarConfiguration by lazy {
-        AppBarConfiguration(navController.graph)
+        AppBarConfiguration(setOf(R.id.homeFragment))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,21 +36,23 @@ class WildDumpActivity : AppCompatActivity() {
         Log.d("DEBUG", "${viewModel.wildDumpData.value?.informations}")
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.moreIcon -> Toast.makeText(this, "Test icon", Toast.LENGTH_SHORT).show()
+        }
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     private fun setupToolbar() {
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        toolbar.inflateMenu(R.menu.toolbar_menu)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.homeFragment)
-                toolbar.visibility = View.GONE
-            else if (destination.id == R.id.destination_map)
-                toolbar.visibility = View.VISIBLE
-
-            //toolbar.menu.findItem(R.id.destination_list).isVisible = destination.id == R.id.destination_list
-
+            if (destination.id != R.id.homeFragment) {
+                // TODO
+            }
         }
     }
 

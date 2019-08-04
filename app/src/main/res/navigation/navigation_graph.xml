@@ -8,6 +8,11 @@
               android:label="Home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_map"
         />
+        <action android:id="@+id/action_homeFragment_to_contributorsFragment"
+                app:destination="@+id/destination_contributors"/>
+        <action android:id="@+id/action_homeFragment_to_infoFragment" app:destination="@id/destination_infos"/>
+        <action android:id="@+id/action_homeFragment_to_newsFragment" app:destination="@id/destination_news"/>
+        <action android:id="@+id/action_homeFragment_to_profilFragment" app:destination="@id/destination_profile"/>
     </fragment>
 
     <fragment android:id="@+id/destination_map" android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
@@ -26,6 +31,16 @@
     <fragment android:id="@+id/detailListFragment"
               android:name="fr.leothosthoren.stopwilddump.ui.details.WildDumpDetailFragment"
               android:label="Detail" tools:layout="@layout/fragment_wild_dump_detail"/>
+    <fragment android:id="@+id/destination_contributors"
+              android:name="fr.leothosthoren.stopwilddump.ui.infos.ContributorsFragment"
+              android:label="fragment_contributors" tools:layout="@layout/fragment_contributors"/>
+    <fragment android:id="@+id/destination_infos" android:name="fr.leothosthoren.stopwilddump.ui.infos.InfoFragment"
+              android:label="fragment_info" tools:layout="@layout/fragment_info"/>
+    <fragment android:id="@+id/destination_news" android:name="fr.leothosthoren.stopwilddump.ui.infos.NewsFragment"
+              android:label="fragment_news" tools:layout="@layout/fragment_news"/>
+    <fragment android:id="@+id/destination_profile"
+              android:name="fr.leothosthoren.stopwilddump.ui.infos.ProfileFragment"
+              android:label="fragment_profil" tools:layout="@layout/fragment_profil"/>
 
 
 </navigation>

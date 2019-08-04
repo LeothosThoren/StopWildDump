@@ -1,4 +1,4 @@
-package fr.leothosthoren.stopwilddump.data
+package fr.leothosthoren.stopwilddump.data.repository
 
 import android.util.Log
 import fr.leothosthoren.stopwilddump.data.models.wildump_models.DumpData
