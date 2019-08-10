@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import fr.leothosthoren.stopwilddump.R
@@ -15,18 +14,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 const val ERROR_DIALOG_REQUEST = 69 //ASCII 'E'
 
-
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        //(activity as AppCompatActivity).setSupportActionBar(homeFragToolbar)
-
-        return rootView
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,11 +35,12 @@ class HomeFragment : Fragment() {
         }
 
         goToReportWildDump.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_info_graph)
+            //findNavController().navigate(R.id.)
+            // TODO : define the next screen to report the wild dump
         }
     }
 
-    fun isGooglePlayServiceOk(): Boolean {
+    private fun isGooglePlayServiceOk(): Boolean {
         val availability = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
         if (availability == ConnectionResult.SUCCESS) {
             //We check that the google services is fine and user can make request

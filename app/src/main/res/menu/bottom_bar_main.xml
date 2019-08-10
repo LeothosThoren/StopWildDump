@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
             android:id="@+id/destination_map"
             android:icon="@drawable/ic_map"
             android:title="@string/title_map"/>
-
     <item
-            android:id="@+id/destination_list"
+            android:id="@+id/destination_wild_dump_list"
             android:icon="@drawable/ic_list"
             android:title="@string/title_list"/>
-
 </menu>
