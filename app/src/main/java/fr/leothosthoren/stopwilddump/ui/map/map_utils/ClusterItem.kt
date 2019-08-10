@@ -19,7 +19,7 @@ data class ClusterItem(
         return title
     }
 
-    override fun getPosition(): LatLng {
+    override fun getPosition(): LatLng? {
         return position
     }
 

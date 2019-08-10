@@ -29,7 +29,7 @@ class CommonViewModel : BaseViewModel() {
 
     init {
         loadWildDumpObject()
-        loadJsonFile()
+        //loadJsonFile()
     }
 
     private fun loadWildDumpObject() {

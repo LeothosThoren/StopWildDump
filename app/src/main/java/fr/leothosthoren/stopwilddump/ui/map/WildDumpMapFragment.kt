@@ -30,6 +30,21 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
     ClusterManager.OnClusterItemClickListener<ClusterItem>,
     ClusterManager.OnClusterItemInfoWindowClickListener<ClusterItem> {
 
+    companion object {
+        const val REQUEST_CODE_LOCATION = 123
+        const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
+        val FRANCE = LatLng(47.1932998, 2.4416936)
+    }
+
+    private lateinit var mMapView: MapView
+    private lateinit var googleMap: GoogleMap
+    private lateinit var clusterManager: ClusterManager<ClusterItem>
+    private val sharedViewModel by lazy {
+        activity?.let {
+            ViewModelProviders.of(it).get(CommonViewModel::class.java)
+        }
+    }
+
     override fun onClusterClick(p0: Cluster<ClusterItem>?): Boolean {
         Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT).show()
         return true
@@ -46,21 +61,6 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
 
     override fun onClusterItemInfoWindowClick(p0: ClusterItem?) {
         Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.snippet}", Toast.LENGTH_SHORT).show()
-    }
-
-    companion object {
-        const val REQUEST_CODE_LOCATION = 123
-        const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
-        val FRANCE = LatLng(47.1932998, 2.4416936)
-    }
-
-    private lateinit var mMapView: MapView
-    private lateinit var googleMap: GoogleMap
-    private lateinit var clusterManager: ClusterManager<ClusterItem>
-    private val sharedViewModel by lazy {
-        activity?.let {
-            ViewModelProviders.of(it).get(CommonViewModel::class.java)
-        }
     }
 
     override fun onCreateView(
@@ -86,6 +86,11 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
         return rootView
     }
 
+    override fun onStart() {
+        super.onStart()
+        mMapView.onStart()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
@@ -95,11 +100,6 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
             outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle)
         }
         mMapView.onSaveInstanceState(mapViewBundle)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mMapView.onStart()
     }
 
     override fun onResume() {
@@ -113,89 +113,6 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
         enableMyLocation()
         changeMapType()
         setUpClusterer()
-    }
-
-    private fun changeMapType() {
-        standardType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL }
-        terrainType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN }
-        hybridType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID }
-        satelliteType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE }
-    }
-
-    private fun centeringMapWithinAnArea() {
-        val france = LatLngBounds(FRANCE, FRANCE)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(france.center, 5.5f))
-    }
-
-    private fun setUpClusterer() {
-        clusterManager = ClusterManager(context, googleMap)
-
-        googleMap.run {
-            setOnCameraIdleListener(clusterManager)
-            setOnMarkerClickListener(clusterManager)
-            setOnInfoWindowClickListener(clusterManager)
-            setInfoWindowAdapter(clusterManager.markerManager)
-        }
-        setUpClusterRenderer()
-    }
-
-    private fun setUpClusterRenderer() {
-        val renderer =
-            CustomClusterRenderer(context, googleMap, clusterManager)
-        clusterManager.renderer = renderer
-
-        val listOfClusterItems = listOf(addLandfillMarkersOnMap())
-        clusterManager.addItems(listOfClusterItems)
-
-        // New
-        clusterManager.run {
-            markerCollection.setOnInfoWindowAdapter(CustomInfoWindowAdapter(LayoutInflater.from(context))) // new
-            setOnClusterItemInfoWindowClickListener {
-                Toast.makeText(context, "onClusterItemInfoWindowClick + ${it.title}", Toast.LENGTH_SHORT).show()
-            } // new
-            setOnClusterInfoWindowClickListener {
-                Toast.makeText(context, "onClusterInfoWindowClick + ${it.size}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun addDumpMarkersOnMap(): ClusterItem? {
-        var offsetItem: ClusterItem? = null
-        sharedViewModel?.wildDumpData?.observe(this, Observer { dumpData ->
-            for (i in 0 until dumpData?.wildDumps?.size!!) {
-                offsetItem =
-                    ClusterItem(
-                        position = LatLng(dumpData.wildDumps[i]?.latitude!!, dumpData.wildDumps[i]?.longitude!!),
-                        title = dumpData.wildDumps[i]?.name!!,
-                        snippet = dumpData.wildDumps[i]?.town!!,
-                        status = dumpData.wildDumps[i]?.type?.contains("Ramassage")!!,
-                        type = 1
-                    )
-                clusterManager.addItem(offsetItem)
-            }
-        })
-        return offsetItem
-    }
-
-    private fun addLandfillMarkersOnMap(): ClusterItem? {
-        var offsetItem: ClusterItem? = null
-        sharedViewModel?.landfills?.observe(this, Observer { landFill ->
-            for (features in landFill?.features!!) {
-                offsetItem =
-                    ClusterItem(
-                        position = LatLng(
-                            features?.geometry?.coordinates?.get(1)!!,
-                            features.geometry.coordinates[0]!!
-                        ),
-                        title = features.properties?.nomDeLaDecheterie!!,
-                        snippet = features.properties.commune!!,
-                        status = true,
-                        type = 2
-                    )
-                clusterManager.addItem(offsetItem)
-            }
-        })
-        return offsetItem
     }
 
     /*** Override the onRequestPermissionResult to use EasyPermissions */
@@ -250,5 +167,88 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
     override fun onLowMemory() {
         super.onLowMemory()
         mMapView.onLowMemory()
+    }
+
+    private fun changeMapType() {
+        standardType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL }
+        terrainType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN }
+        hybridType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID }
+        satelliteType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE }
+    }
+
+    private fun centeringMapWithinAnArea() {
+        val france = LatLngBounds(FRANCE, FRANCE)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(france.center, 5.5f))
+    }
+
+    private fun setUpClusterer() {
+        clusterManager = ClusterManager(context, googleMap)
+
+        googleMap.run {
+            setOnCameraIdleListener(clusterManager)
+            setOnMarkerClickListener(clusterManager)
+            setOnInfoWindowClickListener(clusterManager)
+            setInfoWindowAdapter(clusterManager.markerManager)
+        }
+        setUpClusterRenderer()
+    }
+
+    private fun setUpClusterRenderer() {
+        val renderer =
+            CustomClusterRenderer(context, googleMap, clusterManager)
+        clusterManager.renderer = renderer
+
+        val listOfClusterItems = listOf(addDumpMarkersOnMap())
+        clusterManager.addItems(listOfClusterItems)
+
+        // New
+        clusterManager.run {
+            markerCollection.setOnInfoWindowAdapter(CustomInfoWindowAdapter(LayoutInflater.from(context))) // new
+            setOnClusterItemInfoWindowClickListener {
+                Toast.makeText(context, "onClusterItemInfoWindowClick + ${it.title}", Toast.LENGTH_SHORT).show()
+            } // new
+            setOnClusterInfoWindowClickListener {
+                Toast.makeText(context, "onClusterInfoWindowClick + ${it.size}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun addDumpMarkersOnMap(): ClusterItem? {
+        var offsetItem: ClusterItem? = null
+        sharedViewModel?.wildDumpData?.observe(this, Observer { dumpData ->
+            for (i in 0 until dumpData?.wildDumps?.size!!) {
+                offsetItem =
+                    ClusterItem(
+                        position = LatLng(dumpData.wildDumps[i]?.latitude!!, dumpData.wildDumps[i]?.longitude!!),
+                        title = dumpData.wildDumps[i]?.name!!,
+                        snippet = dumpData.wildDumps[i]?.town!!,
+                        status = dumpData.wildDumps[i]?.type?.contains("Ramassage")!!,
+                        type = 1
+                    )
+                clusterManager.addItem(offsetItem)
+            }
+        })
+        return offsetItem
+    }
+
+    private fun addLandfillMarkersOnMap(): ClusterItem? {
+        var offsetItem: ClusterItem? = null
+        sharedViewModel?.landfills?.observe(this, Observer { landFill ->
+            for (features in landFill?.features!!) {
+                offsetItem =
+                    ClusterItem(
+                        position = LatLng(
+                            features?.geometry?.coordinates?.get(1)!!,
+                            features.geometry.coordinates[0]!!
+                        ),
+                        title = features.properties?.nomDeLaDecheterie!!,
+                        snippet = features.properties.commune!!,
+                        status = true,
+                        type = 2
+                    )
+                clusterManager.addItem(offsetItem)
+            }
+        })
+        return offsetItem
     }
 }
