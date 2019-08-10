@@ -1,4 +1,4 @@
-package fr.leothosthoren.stopwilddump.data.models.wildump_models
+package fr.leothosthoren.stopwilddump.data.models.wilddump
 
 import com.squareup.moshi.Json
 import javax.annotation.Generated

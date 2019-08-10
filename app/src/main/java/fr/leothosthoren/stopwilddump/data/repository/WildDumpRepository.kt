@@ -1,8 +1,8 @@
-package fr.leothosthoren.stopwilddump.data
+package fr.leothosthoren.stopwilddump.data.repository
 
 import android.util.Log
-import fr.leothosthoren.stopwilddump.data.models.wildump_models.DumpData
 import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
+import fr.leothosthoren.stopwilddump.data.models.wilddump.DumpData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

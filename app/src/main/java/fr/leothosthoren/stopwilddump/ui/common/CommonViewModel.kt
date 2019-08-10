@@ -7,7 +7,7 @@ import com.squareup.moshi.Moshi
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.base.BaseViewModel
 import fr.leothosthoren.stopwilddump.data.models.landfill_models.Landfill
-import fr.leothosthoren.stopwilddump.data.models.wildump_models.DumpData
+import fr.leothosthoren.stopwilddump.data.models.wilddump.DumpData
 import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
