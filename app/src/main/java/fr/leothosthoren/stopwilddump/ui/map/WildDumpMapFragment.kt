@@ -2,20 +2,18 @@ package fr.leothosthoren.stopwilddump.ui.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import fr.leothosthoren.stopwilddump.R
+import fr.leothosthoren.stopwilddump.base.BaseMapFragment
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
 import fr.leothosthoren.stopwilddump.ui.map.map_utils.ClusterItem
 import fr.leothosthoren.stopwilddump.ui.map.map_utils.CustomClusterRenderer
@@ -24,7 +22,7 @@ import kotlinx.android.synthetic.main.include_map_type_button.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
+class WildDumpMapFragment : BaseMapFragment(),
     ClusterManager.OnClusterClickListener<ClusterItem>,
     ClusterManager.OnClusterInfoWindowClickListener<ClusterItem>,
     ClusterManager.OnClusterItemClickListener<ClusterItem>,
@@ -32,11 +30,9 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
 
     companion object {
         const val REQUEST_CODE_LOCATION = 123
-        const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
         val FRANCE = LatLng(47.1932998, 2.4416936)
     }
 
-    private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
     private lateinit var clusterManager: ClusterManager<ClusterItem>
     private val sharedViewModel by lazy {
@@ -45,6 +41,21 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
         }
     }
 
+    override fun getLayoutId(): Int = R.layout.fragment_wild_dump_map
+
+    override fun getMapViewId(): Int = R.id.mapView
+
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+        centeringMapWithinAnArea()
+        enableMyLocation()
+        changeMapType()
+        setUpClusterer()
+    }
+
+    //*********
+    //  Action
+    //*********
     override fun onClusterClick(p0: Cluster<ClusterItem>?): Boolean {
         Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT).show()
         return true
@@ -63,58 +74,9 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
         Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.snippet}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_wild_dump_map, container, false)
-        var mapViewBundle: Bundle? = null
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY)
-        }
-        mMapView = rootView.findViewById(R.id.mapView)
-        mMapView.onCreate(mapViewBundle)
-        mMapView.onResume()
-
-        try {
-            MapsInitializer.initialize(activity!!.applicationContext)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        mMapView.getMapAsync(this)
-
-        return rootView
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mMapView.onStart()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        var mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY)
-        if (mapViewBundle == null) {
-            mapViewBundle = Bundle()
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle)
-        }
-        mMapView.onSaveInstanceState(mapViewBundle)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mMapView.onResume()
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
-        centeringMapWithinAnArea()
-        enableMyLocation()
-        changeMapType()
-        setUpClusterer()
-    }
-
+    //*************
+    //  Permission
+    //*************
     /*** Override the onRequestPermissionResult to use EasyPermissions */
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -147,26 +109,6 @@ class WildDumpMapFragment : Fragment(), OnMapReadyCallback,
 
     private fun hasLocationPermission(): Boolean {
         return EasyPermissions.hasPermissions(context!!, Manifest.permission.ACCESS_FINE_LOCATION)
-    }
-
-    override fun onPause() {
-        mMapView.onPause()
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mMapView.onStop()
-    }
-
-    override fun onDestroy() {
-        mMapView.onDestroy()
-        super.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mMapView.onLowMemory()
     }
 
     private fun changeMapType() {
