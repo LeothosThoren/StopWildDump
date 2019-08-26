@@ -3,47 +3,42 @@ package fr.leothosthoren.stopwilddump.ui.wildumplist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import fr.leothosthoren.stopwilddump.R
-import fr.leothosthoren.stopwilddump.data.models.wilddump.WildDumpsItem
-import kotlinx.android.synthetic.main.item_wild_dump.view.*
+import fr.leothosthoren.stopwilddump.data.models.wildump_models.WildDumpsItem
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_wild_dump.*
 
-class WildDumpAdapter : PagedListAdapter<WildDumpsItem, WildDumpAdapter.WildDumpViewHolder>(DIFF_CALLBACK) {
+class WildDumpAdapter(private val wildDumps: List<WildDumpsItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<WildDumpsItem>() {
-            override fun areItemsTheSame(oldItem: WildDumpsItem, newItem: WildDumpsItem): Boolean =
-                oldItem == newItem
+    class WildDumpViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
+        LayoutContainer {
 
-            override fun areContentsTheSame(oldItem: WildDumpsItem, newItem: WildDumpsItem): Boolean =
-                oldItem.id == newItem.id
-        }
-    }
-
-    class WildDumpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WildDumpViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_wild_dump, parent, false)
-        return WildDumpViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: WildDumpViewHolder, position: Int) {
-        val wildDumpItem = getItem(position)
-        holder.itemView.apply {
-            itemTitle.text = resources.getString(R.string.item_wild_dump_title,wildDumpItem?.id ,wildDumpItem?.name)
-            itemSubtitle.text = wildDumpItem?.description
-            Glide.with(context)
-                .load(wildDumpItem?.image)
-                .centerCrop()
-                .into(itemImage)
-
-            if (wildDumpItem?.type?.contains("Ramassage")!!) {
-                itemIconState.setImageResource(R.drawable.ic_dump_clean)
+        fun updateView(wildDumps: WildDumpsItem) {
+            itemTitle.text = wildDumps.name
+            item_Description.text = wildDumps.description
+            Glide.with(containerView.context)
+                .setDefaultRequestOptions(RequestOptions().centerCrop())
+                .load(wildDumps.image)
+                .placeholder(R.drawable.stop_decharges)
+                .into(item_Image)
+            if (wildDumps.type!!.contains("Ramassage")) {
+                item_icon.setImageDrawable(ContextCompat.getDrawable(containerView.context, R.drawable.ic_dump_clean))
             }
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_wild_dump, null)
+        return WildDumpViewHolder(view)
+    }
+
+    override fun getItemCount(): Int = wildDumps.size
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        WildDumpViewHolder(holder.itemView).updateView(wildDumps[position])
+    }
 }
