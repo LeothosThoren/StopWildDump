@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import fr.leothosthoren.stopwilddump.R
-import fr.leothosthoren.stopwilddump.data.models.wildump_models.WildDumpsItem
+import fr.leothosthoren.stopwilddump.data.models.wilddump.WildDumpsItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_wild_dump.*
 

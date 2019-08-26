@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.leothosthoren.stopwilddump.R
-import fr.leothosthoren.stopwilddump.data.models.wildump_models.WildDumpsItem
+import fr.leothosthoren.stopwilddump.data.models.wilddump.WildDumpsItem
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
 import kotlinx.android.synthetic.main.fragment_wild_dump_list.*
 
