@@ -14,23 +14,6 @@ import kotlinx.android.synthetic.main.item_wild_dump.*
 
 class WildDumpAdapter(private val wildDumps: List<WildDumpsItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class WildDumpViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
-
-        fun updateView(wildDumps: WildDumpsItem) {
-            itemTitle.text = wildDumps.name
-            item_Description.text = wildDumps.description
-            Glide.with(containerView.context)
-                .setDefaultRequestOptions(RequestOptions().centerCrop())
-                .load(wildDumps.image)
-                .placeholder(R.drawable.stop_decharges)
-                .into(item_Image)
-            if (wildDumps.type!!.contains("Ramassage")) {
-                item_icon.setImageDrawable(ContextCompat.getDrawable(containerView.context, R.drawable.ic_dump_clean))
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_wild_dump, null)
         return WildDumpViewHolder(view)
@@ -40,5 +23,22 @@ class WildDumpAdapter(private val wildDumps: List<WildDumpsItem>) : RecyclerView
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         WildDumpViewHolder(holder.itemView).updateView(wildDumps[position])
+    }
+}
+
+class WildDumpViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
+    LayoutContainer {
+
+    fun updateView(wildDumps: WildDumpsItem) {
+        itemTitle.text = wildDumps.name
+        item_Description.text = wildDumps.description
+        Glide.with(containerView.context)
+            .setDefaultRequestOptions(RequestOptions().centerCrop())
+            .load(wildDumps.image)
+            .placeholder(R.drawable.stop_decharges)
+            .into(item_Image)
+        if (wildDumps.type!!.contains("Ramassage")) {
+            item_icon.setImageDrawable(ContextCompat.getDrawable(containerView.context, R.drawable.ic_dump_clean))
+        }
     }
 }
