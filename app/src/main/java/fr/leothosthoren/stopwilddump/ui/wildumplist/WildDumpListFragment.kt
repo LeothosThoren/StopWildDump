@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.data.models.wilddump.WildDumpsItem
@@ -44,8 +45,7 @@ class WildDumpListFragment : Fragment() {
         wildDumpAdapter = WildDumpAdapter(list as List<WildDumpsItem>)
         wildDumpList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         wildDumpList.setHasFixedSize(true)
+        wildDumpList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         wildDumpList.adapter = wildDumpAdapter
-
-        wildDumpList.addItemDecoration(RecyclerViewDecorator(wildDumpAdapter))
     }
 }

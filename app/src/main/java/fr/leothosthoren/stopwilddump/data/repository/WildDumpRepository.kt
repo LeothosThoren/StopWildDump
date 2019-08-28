@@ -1,8 +1,8 @@
 package fr.leothosthoren.stopwilddump.data.repository
 
 import android.util.Log
-import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
 import fr.leothosthoren.stopwilddump.data.models.wilddump.DumpData
+import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +23,6 @@ class WildDumpRepository {
                  { result ->
                      onSuccess(result)
                      Log.d("DEBUG", "${result.informations}")
-
                  },
 
                  {
