@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/mapTypeGroup"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@drawable/background_rounded_corner"
-            android:checkedButton="@id/standardType">
+        android:id="@+id/mapTypeGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_rounded_corner"
+        android:checkedButton="@id/standardType"
+        android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatButton
-            style="@style/ButtonMapType"
-            android:text="@string/standard"
+            android:id="@+id/standardType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/standardType" android:bufferType="normal"/>
+            android:enabled="true"
+            android:text="@string/standard" />
 
     <androidx.appcompat.widget.AppCompatButton
-            style="@style/ButtonMapType"
-            android:text="@string/terrain"
+            android:id="@+id/terrainType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/terrainType"/>
+            android:text="@string/terrain" />
 
     <androidx.appcompat.widget.AppCompatButton
-            android:text="@string/hybrid"
+            android:id="@+id/hybridType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/hybridType"/>
+            android:text="@string/hybrid" />
 
     <androidx.appcompat.widget.AppCompatButton
-            android:text="@string/satellite"
+            android:id="@+id/satelliteType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/satelliteType"/>
+            android:text="@string/satellite" />
 </RadioGroup>

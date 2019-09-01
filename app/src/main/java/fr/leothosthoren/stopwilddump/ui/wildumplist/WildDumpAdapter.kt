@@ -46,7 +46,7 @@ class WildDumpViewHolder(override val containerView: View) : RecyclerView.ViewHo
             item_icon.setImageDrawable(ContextCompat.getDrawable(containerView.context, R.drawable.ic_dump_clean))
         }
         // Click
-        item_Image.setOnClickListener {
+        containerView.setOnClickListener {
             onIconClickListener.onIconClick(wildDumps)
         }
     }
