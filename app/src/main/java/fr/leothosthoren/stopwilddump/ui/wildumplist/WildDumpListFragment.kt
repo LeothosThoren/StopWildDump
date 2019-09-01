@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.leothosthoren.stopwilddump.R
@@ -16,7 +17,13 @@ import fr.leothosthoren.stopwilddump.data.models.wilddump.WildDumpsItem
 import fr.leothosthoren.stopwilddump.ui.common.CommonViewModel
 import kotlinx.android.synthetic.main.fragment_wild_dump_list.*
 
-class WildDumpListFragment : Fragment() {
+class WildDumpListFragment : Fragment(), WildDumpAdapter.OnIconClickListener {
+
+    override fun onIconClick(wildDumps: WildDumpsItem) {
+        val nextAction =
+            WildDumpListFragmentDirections.actionDestinationWildDumpListToDetailListFragment()
+        findNavController().navigate(nextAction)
+    }
 
     private lateinit var wildDumpAdapter: WildDumpAdapter
     private val sharedViewModel by lazy {
@@ -42,7 +49,7 @@ class WildDumpListFragment : Fragment() {
 
     @SuppressLint("WrongConstant")
     private fun configureRecyclerView(list: List<WildDumpsItem?>?) {
-        wildDumpAdapter = WildDumpAdapter(list as List<WildDumpsItem>)
+        wildDumpAdapter = WildDumpAdapter(list as List<WildDumpsItem>, this)
         wildDumpList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         wildDumpList.setHasFixedSize(true)
         wildDumpList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

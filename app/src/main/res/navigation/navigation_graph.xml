@@ -6,7 +6,7 @@
 
     <fragment android:id="@+id/homeFragment" android:name="fr.leothosthoren.stopwilddump.ui.home.HomeFragment"
               android:label="Home" tools:layout="@layout/fragment_home">
-        <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_map"
+        <action android:id="@+id/action_homeFragment_to_destination_map" app:destination="@id/destination_global_map"
         />
         <action android:id="@+id/action_homeFragment_to_contributorsFragment"
                 app:destination="@+id/destination_contributors"/>
@@ -15,20 +15,22 @@
         <action android:id="@+id/action_homeFragment_to_profilFragment" app:destination="@id/destination_profile"/>
     </fragment>
 
-    <fragment android:id="@+id/destination_map" android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
+    <fragment android:id="@+id/destination_global_map"
+              android:name="fr.leothosthoren.stopwilddump.ui.map.WildDumpMapFragment"
               android:label="Map" tools:layout="@layout/fragment_wild_dump_map">
         <action android:id="@+id/action_destination_map_to_destination_detail"
-                app:destination="@id/detailListFragment"
+                app:destination="@id/destination_detail"
                 app:exitAnim="@anim/nav_default_exit_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 
     <fragment android:id="@+id/destination_wild_dump_list"
               android:name="fr.leothosthoren.stopwilddump.ui.wildumplist.WildDumpListFragment"
               android:label="List" tools:layout="@layout/fragment_wild_dump_list">
-        <action android:id="@+id/action_destination_list_to_destination_map" app:destination="@+id/destination_map"/>
+        <action android:id="@+id/action_destination_wild_dump_list_to_detail_list_fragment"
+                app:destination="@id/destination_detail"/>
     </fragment>
 
-    <fragment android:id="@+id/detailListFragment"
+    <fragment android:id="@+id/destination_detail"
               android:name="fr.leothosthoren.stopwilddump.ui.details.WildDumpDetailFragment"
               android:label="Detail" tools:layout="@layout/fragment_wild_dump_detail"/>
     <fragment android:id="@+id/destination_contributors"
@@ -41,6 +43,4 @@
     <fragment android:id="@+id/destination_profile"
               android:name="fr.leothosthoren.stopwilddump.ui.infos.ProfileFragment"
               android:label="fragment_profil" tools:layout="@layout/fragment_profil"/>
-
-
 </navigation>

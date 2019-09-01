@@ -3,7 +3,7 @@ package fr.leothosthoren.stopwilddump.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -16,11 +16,11 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Action
-        goToMap.setOnClickListener {
+        goToMap.setOnClickListener { button ->
             if (isGooglePlayServiceOk()) {
                 val nextAction =
                     HomeFragmentDirections.actionHomeFragmentToDestinationMap()
-                Navigation.findNavController(it).navigate(nextAction)
+                button.findNavController().navigate(nextAction)
             }
         }
 

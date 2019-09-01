@@ -41,10 +41,11 @@ class WildDumpActivity : AppCompatActivity() {
         nav_view.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { nav, destination, _ ->
             when (destination.id) {
-                R.id.destination_map -> nav_view.visibility = View.VISIBLE
+                R.id.destination_global_map -> nav_view.visibility = View.VISIBLE
                 R.id.destination_wild_dump_list -> nav_view.visibility = View.VISIBLE
                 else -> nav_view.visibility = View.GONE
             }
+            nav_view.setOnNavigationItemReselectedListener { }
         }
     }
 
