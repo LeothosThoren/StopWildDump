@@ -51,7 +51,9 @@
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="ButtonMapType">
-        <item name="android:background">@drawable/map_button_state</item>
+    <style name="ButtonMapTypeDisabled" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">@drawable/border_map_type_button</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 </resources>

@@ -1,0 +1,33 @@
+<resources>
+    <!-- Toolbar -->
+    <string name="app_name">Stop Décharge Sauvages</string>
+    <string name="title_activity_info">InfoActivity</string>
+
+    <!-- Common -->
+    <string name="wild_dumps">Les décharges sauvages</string>
+    <string name="error_message">Une erreur est survenue, vérifier votre connexion internet</string>
+    <string name="title_map">La carte</string>
+    <string name="title_list">Liste</string>
+
+    <!-- Home -->
+    <string name="button_see_map">Voir la carte</string>
+    <string name="signal_wild_dump">Signaler une décharge sauvage</string>
+    <string name="home_title">Parceque nous ne voulons plus voir cela</string>
+    <string name="option_menu">Option</string>
+
+    <!--Map-->
+    <string name="map_api_key" translatable="false">AIzaSyAXKsXiBk6eTGQ9AnQiLC5RDqbxdzMo-_o</string>
+    <string name="standard">Standard</string>
+    <string name="hybrid">Hybride</string>
+    <string name="satellite">Satellite</string>
+    <string name="terrain">Terrain</string>
+
+    <!--List wild dump-->
+    <string name="item_wild_dump_title">%1$d %2$s</string>
+
+    <!-- Info -->
+    <string name="information">Information</string>
+    <string name="news">News</string>
+    <string name="contributors">Contributeurs</string>
+    <string name="profile">Profil</string>
+</resources>

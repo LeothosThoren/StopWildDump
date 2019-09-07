@@ -57,21 +57,25 @@ class WildDumpMapFragment : BaseMapFragment(),
     //  Action
     //*********
     override fun onClusterClick(p0: Cluster<ClusterItem>?): Boolean {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT)
+            .show()
         return true
     }
 
     override fun onClusterInfoWindowClick(p0: Cluster<ClusterItem>?) {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onClusterItemClick(p0: ClusterItem?): Boolean {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.title}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.title}", Toast.LENGTH_SHORT)
+            .show()
         return true
     }
 
     override fun onClusterItemInfoWindowClick(p0: ClusterItem?) {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.snippet}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.snippet}", Toast.LENGTH_SHORT)
+            .show()
     }
 
     //*************
@@ -112,7 +116,14 @@ class WildDumpMapFragment : BaseMapFragment(),
     }
 
     private fun changeMapType() {
-        standardType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL }
+        var selected = false
+        standardType.setOnClickListener {
+            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+            standardType.run {
+                setBackgroundResource(R.color.colorPrimaryDark)
+                setTextColor(resources.getColor(android.R.color.white, null))
+            }
+        }
         terrainType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN }
         hybridType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID }
         satelliteType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE }
@@ -145,12 +156,23 @@ class WildDumpMapFragment : BaseMapFragment(),
 
         // New
         clusterManager.run {
-            markerCollection.setOnInfoWindowAdapter(CustomInfoWindowAdapter(LayoutInflater.from(context))) // new
+            markerCollection.setOnInfoWindowAdapter(
+                CustomInfoWindowAdapter(
+                    LayoutInflater.from(
+                        context
+                    )
+                )
+            ) // new
             setOnClusterItemInfoWindowClickListener {
-                Toast.makeText(context, "onClusterItemInfoWindowClick + ${it.title}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "onClusterItemInfoWindowClick + ${it.title}",
+                    Toast.LENGTH_SHORT
+                ).show()
             } // new
             setOnClusterInfoWindowClickListener {
-                Toast.makeText(context, "onClusterInfoWindowClick + ${it.size}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "onClusterInfoWindowClick + ${it.size}", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -161,7 +183,10 @@ class WildDumpMapFragment : BaseMapFragment(),
             for (i in 0 until dumpData?.wildDumps?.size!!) {
                 offsetItem =
                     ClusterItem(
-                        position = LatLng(dumpData.wildDumps[i]?.latitude!!, dumpData.wildDumps[i]?.longitude!!),
+                        position = LatLng(
+                            dumpData.wildDumps[i]?.latitude!!,
+                            dumpData.wildDumps[i]?.longitude!!
+                        ),
                         title = dumpData.wildDumps[i]?.name!!,
                         snippet = dumpData.wildDumps[i]?.town!!,
                         status = dumpData.wildDumps[i]?.type?.contains("Ramassage")!!,
