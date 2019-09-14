@@ -3,14 +3,17 @@ package fr.leothosthoren.stopwilddump.ui.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import fr.leothosthoren.stopwilddump.R
 import fr.leothosthoren.stopwilddump.base.BaseMapFragment
@@ -23,10 +26,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
 class WildDumpMapFragment : BaseMapFragment(),
-    ClusterManager.OnClusterClickListener<ClusterItem>,
-    ClusterManager.OnClusterInfoWindowClickListener<ClusterItem>,
-    ClusterManager.OnClusterItemClickListener<ClusterItem>,
-    ClusterManager.OnClusterItemInfoWindowClickListener<ClusterItem> {
+    View.OnClickListener {
 
     companion object {
         const val REQUEST_CODE_LOCATION = 123
@@ -49,33 +49,33 @@ class WildDumpMapFragment : BaseMapFragment(),
         googleMap = map
         centeringMapWithinAnArea()
         enableMyLocation()
-        changeMapType()
         setUpClusterer()
+        changeMapType()
     }
 
-    //*********
-    //  Action
-    //*********
-    override fun onClusterClick(p0: Cluster<ClusterItem>?): Boolean {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT)
-            .show()
-        return true
-    }
-
-    override fun onClusterInfoWindowClick(p0: Cluster<ClusterItem>?) {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.size}", Toast.LENGTH_SHORT)
-            .show()
-    }
-
-    override fun onClusterItemClick(p0: ClusterItem?): Boolean {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.title}", Toast.LENGTH_SHORT)
-            .show()
-        return true
-    }
-
-    override fun onClusterItemInfoWindowClick(p0: ClusterItem?) {
-        Toast.makeText(context, "onClusterItemInfoWindowClick + ${p0?.snippet}", Toast.LENGTH_SHORT)
-            .show()
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.standardType -> {
+                changeMapType()
+                setTypeMapStyle(v, R.color.colorPrimaryDark, android.R.color.white)
+                googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+            }
+            R.id.terrainType -> {
+                changeMapType()
+                setTypeMapStyle(v, R.color.colorPrimaryDark, android.R.color.white)
+                googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+            }
+            R.id.hybridType -> {
+                changeMapType()
+                setTypeMapStyle(v, R.color.colorPrimaryDark, android.R.color.white)
+                googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+            }
+            R.id.satelliteType -> {
+                changeMapType()
+                setTypeMapStyle(v, R.color.colorPrimaryDark, android.R.color.white)
+                googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+            }
+        }
     }
 
     //*************
@@ -116,17 +116,16 @@ class WildDumpMapFragment : BaseMapFragment(),
     }
 
     private fun changeMapType() {
-        var selected = false
-        standardType.setOnClickListener {
-            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-            standardType.run {
-                setBackgroundResource(R.color.colorPrimaryDark)
-                setTextColor(resources.getColor(android.R.color.white, null))
-            }
+        val arrayBtn = arrayOf(standardType, terrainType, hybridType, satelliteType)
+        for (i in arrayBtn.indices) {
+            arrayBtn[i].setOnClickListener(this)
+            setTypeMapStyle(arrayBtn[i], R.color.transient_background, R.color.colorPrimaryDark)
         }
-        terrainType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN }
-        hybridType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID }
-        satelliteType.setOnClickListener { googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE }
+    }
+
+    private fun setTypeMapStyle(view: View, @ColorRes backgroundColor: Int, @ColorRes textColor: Int) {
+        view.setBackgroundResource(backgroundColor)
+        (view as TextView).setTextColor(ContextCompat.getColor(requireContext(), textColor))
     }
 
     private fun centeringMapWithinAnArea() {
