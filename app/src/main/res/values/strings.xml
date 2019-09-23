@@ -31,4 +31,9 @@
     <string name="news">News</string>
     <string name="contributors">Contributors</string>
     <string name="profile">Profile</string>
+
+    <!-- Detail -->
+    <string name="type">Type: %1$s</string>
+    <string name="zip">Zip: %1$s</string>
+    <string name="city">City: %1$s</string>
 </resources>

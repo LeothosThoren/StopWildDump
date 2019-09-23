@@ -1,8 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.details.WildDumpDetailFragment">
+
+    <TextView
+            android:id="@+id/detailType"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/type" />
+
+    <TextView
+            android:id="@+id/detailZipCode"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailType"
+            tools:text="@string/zip" />
+
+    <TextView
+            android:id="@+id/detailCity"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/detailZipCode"
+            app:layout_constraintTop_toTopOf="@+id/detailZipCode"
+            tools:text="@string/city" />
+
+    <TextView
+            android:id="@+id/detailLat"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Lat: %1$s"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailZipCode" />
+
+    <TextView
+            android:id="@+id/detailLong"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Long: %1$s"
+            app:layout_constraintStart_toEndOf="@+id/detailLat"
+            app:layout_constraintTop_toTopOf="@+id/detailLat" />
+
+    <TextView
+            android:id="@+id/detailId"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="ID: %1$s"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+            android:id="@+id/detailIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_rounded_corner"
+            android:padding="10dp"
+            android:src="@drawable/ic_dump_clean"
+            app:layout_constraintEnd_toEndOf="@+id/detailId"
+            app:layout_constraintStart_toStartOf="@+id/detailId"
+            app:layout_constraintTop_toBottomOf="@+id/detailId" />
+
+    <TextView
+            android:id="@+id/detailSignalDate"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Signal date: %1$s"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailLat" />
+
+    <TextView
+            android:id="@+id/detailSignalClean"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Clean date: %1$s"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailSignalDate" />
+
+    <TextView
+            android:id="@+id/detailDescription"
+            style="@style/AppText.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Description:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailSignalClean" />
+
+    <TextView
+            android:id="@+id/detailDescriptionContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailDescription"
+            tools:text="Lorem epsom Lorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsom" />
+
+    <ImageView
+            android:id="@+id/detailImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/stop_decharges"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailDescriptionContent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
