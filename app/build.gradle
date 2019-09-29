@@ -62,7 +62,6 @@ dependencies {
     // Utility library
     implementation "com.google.maps.android:android-maps-utils:0.5+"
 
-
     // Easy permissions
     implementation "pub.devrel:easypermissions:$easy_permission_version"
 

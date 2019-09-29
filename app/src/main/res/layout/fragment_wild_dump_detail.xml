@@ -1,150 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.details.WildDumpDetailFragment">
+        android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/detailType"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/type" />
+            tools:context=".ui.details.WildDumpDetailFragment">
 
-    <TextView
-            android:id="@+id/detailZipCode"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailType"
-            tools:text="@string/zip" />
+        <TextView
+                android:id="@+id/detailType"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/type" />
 
-    <TextView
-            android:id="@+id/detailCity"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/detailZipCode"
-            app:layout_constraintTop_toTopOf="@+id/detailZipCode"
-            tools:text="@string/city" />
+        <TextView
+                android:id="@+id/detailZipCode"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailType"
+                tools:text="@string/zip" />
 
-    <TextView
-            android:id="@+id/detailLat"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailZipCode"
-            tools:text="@string/detail_latitude" />
+        <TextView
+                android:id="@+id/detailCity"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/detailZipCode"
+                app:layout_constraintTop_toTopOf="@+id/detailZipCode"
+                tools:text="@string/city" />
 
-    <TextView
-            android:id="@+id/detailLong"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/detailLat"
-            app:layout_constraintTop_toTopOf="@+id/detailLat"
-            tools:text="@string/detail_longitude" />
+        <TextView
+                android:id="@+id/detailLat"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailZipCode"
+                tools:text="@string/detail_latitude" />
 
-    <TextView
-            android:id="@+id/detailId"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/detail_wild_dump_id" />
+        <TextView
+                android:id="@+id/detailLong"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/detailLat"
+                app:layout_constraintTop_toTopOf="@+id/detailLat"
+                tools:text="@string/detail_longitude" />
 
-    <ImageView
-            android:id="@+id/detailIcon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/background_rounded_corner"
-            android:padding="10dp"
-            android:src="@drawable/ic_dump_trash"
-            app:layout_constraintEnd_toEndOf="@+id/detailId"
-            app:layout_constraintStart_toStartOf="@+id/detailId"
-            app:layout_constraintTop_toBottomOf="@+id/detailId" />
+        <TextView
+                android:id="@+id/detailId"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/detailIcon"
+                app:layout_constraintStart_toStartOf="@+id/detailIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/detail_wild_dump_id" />
 
-    <TextView
-            android:id="@+id/detailSignalDate"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailLat"
-            tools:text="@string/signal_date" />
+        <ImageView
+                android:id="@+id/detailIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_rounded_corner"
+                android:padding="10dp"
+                android:src="@drawable/ic_dump_trash"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailId" />
 
-    <TextView
-            android:id="@+id/detailSignalClean"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailSignalDate"
-            tools:text="@string/clean_date" />
+        <TextView
+                android:id="@+id/detailSignalDate"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailLat"
+                tools:text="@string/signal_date" />
 
-    <TextView
-            android:id="@+id/detailDescription"
-            style="@style/AppText.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/detail_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailSignalClean" />
+        <TextView
+                android:id="@+id/detailSignalClean"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailSignalDate"
+                tools:text="@string/clean_date"
+                tools:visibility="visible" />
 
-    <TextView
-            android:id="@+id/detailDescriptionContent"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@android:color/white"
-            android:minLines="3"
-            android:padding="8dp"
-            android:scrollbars="vertical"
-            android:textAlignment="gravity"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailDescription"
-            tools:text="Lorem epsom Lorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsom" />
+        <TextView
+                android:id="@+id/detailDescription"
+                style="@style/AppText.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/detail_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailSignalClean" />
 
-    <ImageView
-            android:id="@+id/detailImage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailDescriptionContent"
-            tools:src="@drawable/stop_decharges" />
+        <TextView
+                android:id="@+id/detailDescriptionContent"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/white"
+                android:padding="8dp"
+                android:scrollbars="vertical"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailDescription"
+                tools:text="Lorem epsom Lorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsomLorem epsom" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+                android:id="@+id/detailImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailDescriptionContent"
+                tools:src="@drawable/stop_decharges" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
