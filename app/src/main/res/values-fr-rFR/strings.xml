@@ -30,4 +30,15 @@
     <string name="news">News</string>
     <string name="contributors">Contributeurs</string>
     <string name="profile">Profil</string>
+
+    <!-- Detail -->
+    <string name="type">Type : %1$s</string>
+    <string name="zip">Code postal : %1$s</string>
+    <string name="city">Ville : %1$s</string>
+    <string name="detail_latitude">Lat : %1$s</string>
+    <string name="detail_longitude">Long : %1$s</string>
+    <string name="detail_wild_dump_id">ID: %1$s</string>
+    <string name="signal_date">Date de signalement : %1$s</string>
+    <string name="clean_date">Date de nettoyage : %1$s</string>
+    <string name="detail_description">Description :</string>
 </resources>

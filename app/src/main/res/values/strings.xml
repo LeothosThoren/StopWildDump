@@ -36,4 +36,10 @@
     <string name="type">Type: %1$s</string>
     <string name="zip">Zip: %1$s</string>
     <string name="city">City: %1$s</string>
+    <string name="detail_latitude">Lat: %1$s</string>
+    <string name="detail_longitude">Long: %1$s</string>
+    <string name="detail_wild_dump_id">ID: %1$s</string>
+    <string name="signal_date">Signal date: %1$s</string>
+    <string name="clean_date">Clean date: %1$s</string>
+    <string name="detail_description">Description:</string>
 </resources>
