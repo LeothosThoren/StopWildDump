@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -51,6 +50,7 @@ class WildDumpMapFragment : BaseMapFragment(),
         enableMyLocation()
         setUpClusterer()
         changeMapType()
+        setTypeMapStyle(standardType, R.color.colorPrimaryDark, android.R.color.white)
     }
 
     override fun onClick(v: View?) {
@@ -138,9 +138,7 @@ class WildDumpMapFragment : BaseMapFragment(),
 
         googleMap.run {
             setOnCameraIdleListener(clusterManager)
-            setOnMarkerClickListener(clusterManager)
-            setOnInfoWindowClickListener(clusterManager)
-            setInfoWindowAdapter(clusterManager.markerManager)
+            setInfoWindowAdapter(CustomInfoWindowAdapter(LayoutInflater.from(context)))
         }
         setUpClusterRenderer()
     }
@@ -150,30 +148,9 @@ class WildDumpMapFragment : BaseMapFragment(),
             CustomClusterRenderer(context, googleMap, clusterManager)
         clusterManager.renderer = renderer
 
+        // TODO: define if we are using a list or a simple dump object
         val listOfClusterItems = listOf(addDumpMarkersOnMap())
         clusterManager.addItems(listOfClusterItems)
-
-        // New
-        clusterManager.run {
-            markerCollection.setOnInfoWindowAdapter(
-                CustomInfoWindowAdapter(
-                    LayoutInflater.from(
-                        context
-                    )
-                )
-            ) // new
-            setOnClusterItemInfoWindowClickListener {
-                Toast.makeText(
-                    context,
-                    "onClusterItemInfoWindowClick + ${it.title}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } // new
-            setOnClusterInfoWindowClickListener {
-                Toast.makeText(context, "onClusterInfoWindowClick + ${it.size}", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
     }
 
     private fun addDumpMarkersOnMap(): ClusterItem? {
