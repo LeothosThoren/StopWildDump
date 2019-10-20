@@ -2,24 +2,21 @@ package fr.leothosthoren.stopwilddump.ui.common
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import fr.leothosthoren.stopwilddump.R
-import fr.leothosthoren.stopwilddump.base.BaseViewModel
 import fr.leothosthoren.stopwilddump.data.models.landfill_models.Landfill
 import fr.leothosthoren.stopwilddump.data.models.wilddump.DumpData
-import fr.leothosthoren.stopwilddump.data.remote.WildDumpApi
+import fr.leothosthoren.stopwilddump.data.repository.WildDumpRepository
+import fr.leothosthoren.stopwilddump.di.module.NetworkModule
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.IOException
 import java.nio.charset.Charset
-import javax.inject.Inject
 
-class CommonViewModel : BaseViewModel() {
-
-    @Inject
-    lateinit var wildDumpApi: WildDumpApi
+class CommonViewModel(val repo: WildDumpRepository) : ViewModel() {
 
     private lateinit var subscription: Disposable
     // val
@@ -33,7 +30,7 @@ class CommonViewModel : BaseViewModel() {
     }
 
     private fun loadWildDumpObject() {
-        subscription = wildDumpApi.getWildDumpObject()
+        subscription = NetworkModule.wildDumpService().getWildDumpObject()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { onSubscribe() }
